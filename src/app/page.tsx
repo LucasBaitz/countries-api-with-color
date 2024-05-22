@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 import { Country } from "@/interfaces/Country";
 
 const Home: React.FC = () => {
-  const [countries, setCountries] = useState<Country[]>(countriesData);
+  const [countries, setCountries] = useState<Country[]>(countriesData as Country[]);
   const [filtered, setFiltered] = useState<Country[]>([]);
 
   const handleFilter = (value: string) => {
