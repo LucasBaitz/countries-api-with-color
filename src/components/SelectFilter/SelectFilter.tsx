@@ -1,8 +1,7 @@
-"use client";
 import React, { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
-import { Check, ChevronDown, ChevronsDown, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -12,6 +11,7 @@ import {
   CommandList,
 } from "../ui/command";
 import { cn } from "@/lib/utils";
+import { Region } from "@/interfaces/Region";
 
 interface SelectFilterProps {
   onSelect: (value: string) => void;
@@ -19,24 +19,19 @@ interface SelectFilterProps {
 
 const regions = [
   {
-    value: "Africa",
-    label: "Africa",
+    value: Region.Africa,
   },
   {
-    value: "Americas",
-    label: "Americas",
+    value: Region.Americas,
   },
   {
-    value: "Asia",
-    label: "Asia",
+    value: Region.Asia,
   },
   {
-    value: "Europe",
-    label: "Europe",
+    value: Region.Europe,
   },
   {
-    value: "Oceania",
-    label: "Oceania",
+    value: Region.Oceania,
   },
 ];
 
@@ -57,15 +52,17 @@ const SelectFilter: React.FC<SelectFilterProps> = ({ onSelect }) => {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild >
         <Button
+          name="Region selection"
+          aria-label="Region selection"
           variant="default"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] h-[70x] justify-between bg-white dark:bg-[#2B3743] text-gray-500 dark:text-gray-300 shadow-md hover:bg-gray-50"
+          className="w-[200px] p-5 h-full justify-between bg-white dark:bg-[#2B3743] text-gray-500 dark:text-gray-300 shadow-md hover:bg-gray-50 m-0 "
         >
           {value
-            ? regions.find((region) => region.value === value)?.label
+            ? regions.find((region) => region.value === value)?.value
             : "Filter by Region"}
           <ChevronDown className="ml-2 h-4 w-4 shrink-0" />
         </Button>
@@ -80,6 +77,7 @@ const SelectFilter: React.FC<SelectFilterProps> = ({ onSelect }) => {
                 <CommandItem
                   key={region.value}
                   value={region.value}
+                  aria-label={region.value}
                   onSelect={handleSelection}
                 >
                   <Check
@@ -88,7 +86,7 @@ const SelectFilter: React.FC<SelectFilterProps> = ({ onSelect }) => {
                       value === region.value ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {region.label}
+                  {region.value}
                 </CommandItem>
               ))}
             </CommandGroup>

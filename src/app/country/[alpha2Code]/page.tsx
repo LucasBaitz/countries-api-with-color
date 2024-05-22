@@ -19,7 +19,7 @@ const CountryPage: React.FC<CountryPageProps> = ({ params }) => {
 
   return (
     <main className="flex min-h-screen lg:mt-10 lg:flex-col lg:items-center p-8 lg:px-24">
-      <div className="flex flex-col md:flex-row justify-around w-full gap-28">
+      <div className="flex flex-col md:flex-row justify-around w-full md:gap-28">
         <div className="w-full">
           <Image
             src={country?.flags.svg!}
